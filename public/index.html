@@ -7,20 +7,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <div class="container">
-    <h1>📝 My To-Do List</h1>
-
-    <!-- Add Task Form -->
-    <div class="input-section">
-      <input type="text" id="taskInput" placeholder="Enter a task..." />
-      <button onclick="addTask()">Add</button>
+  <div class="welcome-container">
+    <div class="welcome-box">
+      <h1>📝 To-Do App</h1>
+      <p>What's your name?</p>
+      <input
+        type="text"
+        id="nameInput"
+        placeholder="Enter your name..."
+        maxlength="30"
+      />
+      <button onclick="saveName()">Let's Go →</button>
     </div>
-
-    <!-- Task List -->
-    <ul id="taskList"></ul>
   </div>
+  <script>
+    function saveName() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name) return alert('Please enter your name!');
+      localStorage.setItem('username', name);
+      window.location.href = '/todo.html';
+    }
 
-  <script src="script.js"></script>
+    // If name already saved skip this page
+    if (localStorage.getItem('username')) {
+      window.location.href = '/todo.html';
+    }
+
+    // Allow pressing Enter key
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('nameInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') saveName();
+      });
+    });
+  </script>
 </body>
 </html>
