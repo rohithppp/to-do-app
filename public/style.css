@@ -2,82 +2,183 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-  background-color: #f0f2f5;
+  background-color: #0f0f0f;
+  color: #f1f1f1;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: 50px 20px;
 }
 
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
+/* ── Welcome Page ── */
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1 {
+.welcome-box {
+  background: #1a1a1a;
+  padding: 50px 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
   text-align: center;
-  margin-bottom: 24px;
-  color: #333;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  border: 1px solid #2a2a2a;
 }
 
+.welcome-box h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #f1f1f1;
+}
+
+.welcome-box p {
+  color: #888;
+  margin-bottom: 24px;
+  font-size: 1rem;
+}
+
+/* ── Main App ── */
+.container {
+  width: 100%;
+  max-width: 580px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: #f1f1f1;
+}
+
+.subtext {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.logout-btn {
+  background: #2a2a2a;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background: #333;
+  color: #f1f1f1;
+}
+
+/* ── Input Section ── */
 .input-section {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
-input {
-  flex: 1;
-  padding: 10px 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+input[type="text"],
+input[type="date"] {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #f1f1f1;
+  padding: 12px 16px;
+  border-radius: 10px;
   font-size: 15px;
   outline: none;
+  transition: border 0.2s;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 180px;
+}
+
+input[type="date"] {
+  width: 160px;
+  color: #aaa;
 }
 
 input:focus {
-  border-color: #4f46e5;
+  border-color: #6366f1;
 }
 
 button {
-  padding: 10px 18px;
-  background-color: #4f46e5;
+  padding: 12px 20px;
+  background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
+  transition: background 0.2s;
 }
 
 button:hover {
-  background-color: #4338ca;
+  background-color: #4f46e5;
 }
 
+/* ── Task List ── */
 ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 14px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  background: #fafafa;
+  padding: 16px 18px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  transition: border 0.2s;
 }
 
-li.done span {
+li:hover {
+  border-color: #6366f1;
+}
+
+li.done .task-title {
   text-decoration: line-through;
-  color: #aaa;
+  color: #555;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-title {
+  font-size: 15px;
+  color: #f1f1f1;
+}
+
+.task-due {
+  font-size: 12px;
+  color: #6366f1;
+}
+
+.task-due.overdue {
+  color: #ef4444;
 }
 
 .actions {
@@ -87,8 +188,9 @@ li.done span {
 
 .done-btn {
   background-color: #22c55e;
-  padding: 6px 12px;
+  padding: 8px 12px;
   font-size: 13px;
+  border-radius: 8px;
 }
 
 .done-btn:hover {
@@ -97,10 +199,19 @@ li.done span {
 
 .delete-btn {
   background-color: #ef4444;
-  padding: 6px 12px;
+  padding: 8px 12px;
   font-size: 13px;
+  border-radius: 8px;
 }
 
 .delete-btn:hover {
   background-color: #dc2626;
+}
+
+/* ── Empty State ── */
+.empty {
+  text-align: center;
+  color: #444;
+  margin-top: 40px;
+  font-size: 15px;
 }
