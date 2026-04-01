@@ -15,6 +15,16 @@ app.use(express.json());
 // Serve frontend files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve index.html for root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Serve todo.html
+app.get('/todo.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'todo.html'));
+});
+
 // Setup Supabase
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -34,12 +44,12 @@ app.get('/tasks', async (req, res) => {
 
 // ✅ POST - Add a new task
 app.post('/tasks', async (req, res) => {
-  const { title } = req.body;
+  const { title, due_date } = req.body;
   if (!title) return res.status(400).json({ error: 'Title is required' });
 
   const { data, error } = await supabase
     .from('tasks')
-    .insert([{ title, done: false }])
+    .insert([{ title, done: false, due_date: due_date || null }])
     .select();
 
   if (error) return res.status(500).json({ error: error.message });

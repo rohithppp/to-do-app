@@ -4,23 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>To-Do App</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    body {
+      background-color: #0f0f0f;
+      color: #f1f1f1;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .welcome-box {
+      background: #1a1a1a;
+      padding: 50px 40px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      border: 1px solid #2a2a2a;
+    }
+    .welcome-box h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #f1f1f1;
+    }
+    .welcome-box p {
+      color: #888;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+    input {
+      width: 100%;
+      background: #0f0f0f;
+      border: 1px solid #2a2a2a;
+      color: #f1f1f1;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    input:focus {
+      border-color: #6366f1;
+    }
+    button {
+      width: 100%;
+      padding: 12px 20px;
+      background-color: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button:hover {
+      background-color: #4f46e5;
+    }
+  </style>
 </head>
 <body>
-  <div class="welcome-container">
-    <div class="welcome-box">
-      <h1>📝 To-Do App</h1>
-      <p>What's your name?</p>
-      <input
-        type="text"
-        id="nameInput"
-        placeholder="Enter your name..."
-        maxlength="30"
-      />
-      <button onclick="saveName()">Let's Go →</button>
-    </div>
+  <div class="welcome-box">
+    <h1>📝 To-Do App</h1>
+    <p>What's your name?</p>
+    <input
+      type="text"
+      id="nameInput"
+      placeholder="Enter your name..."
+      maxlength="30"
+    />
+    <button onclick="saveName()">Let's Go →</button>
   </div>
+
   <script>
+    // If name already saved skip this page
+    if (localStorage.getItem('username')) {
+      window.location.href = '/todo.html';
+    }
+
     function saveName() {
       const name = document.getElementById('nameInput').value.trim();
       if (!name) return alert('Please enter your name!');
@@ -28,16 +94,9 @@
       window.location.href = '/todo.html';
     }
 
-    // If name already saved skip this page
-    if (localStorage.getItem('username')) {
-      window.location.href = '/todo.html';
-    }
-
     // Allow pressing Enter key
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('nameInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') saveName();
-      });
+    document.getElementById('nameInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') saveName();
     });
   </script>
 </body>
